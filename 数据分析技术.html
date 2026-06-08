@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据分析技术 - 郑鑫老师</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #10b981;
+            --accent-color: #f59e0b;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --gray-color: #64748b;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --border-radius: 0.5rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), #60a5fa);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Progress Bar */
+        .progress-section {
+            background-color: white;
+            padding: 2rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .progress-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .progress-title {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .progress-percentage {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #e2e8f0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+
+        /* Learning Section */
+        .learning-section {
+            padding: 4rem 0;
+            background-color: white;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark-color);
+        }
+
+        .learning-module {
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .module-title {
+            font-size: 1.3rem;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .module-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .module-status {
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .module-status.completed {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .module-status.in-progress {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .module-status.pending {
+            background-color: #e2e8f0;
+            color: #475569;
+        }
+
+        .module-content {
+            display: none;
+        }
+
+        .module-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .learning-content {
+            margin-bottom: 2rem;
+        }
+
+        .learning-content h4 {
+            color: var(--dark-color);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .learning-content p {
+            color: var(--gray-color);
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .learning-content ul, .learning-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--gray-color);
+        }
+
+        .learning-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .highlight-box {
+            background-color: #eff6ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .highlight-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box p {
+            color: var(--dark-color);
+            margin-bottom: 0;
+        }
+
+        .complete-btn {
+            display: inline-block;
+            background-color: var(--success-color);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .complete-btn:hover {
+            background-color: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .complete-btn:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            padding: 4rem 0;
+            background-color: #f1f5f9;
+            display: none;
+        }
+
+        .quiz-section.active {
+            display: block;
+        }
+
+        .quiz-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-header h2 {
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-header p {
+            color: var(--gray-color);
+        }
+
+        .question-container {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .question-container:last-child {
+            border-bottom: none;
+        }
+
+        .question-number {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            color: var(--dark-color);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--light-color);
+            border: 2px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            border-color: var(--primary-color);
+            background-color: #eff6ff;
+        }
+
+        .option.selected {
+            border-color: var(--primary-color);
+            background-color: #dbeafe;
+        }
+
+        .option.correct {
+            border-color: var(--success-color);
+            background-color: #d1fae5;
+        }
+
+        .option.incorrect {
+            border-color: var(--error-color);
+            background-color: #fee2e2;
+        }
+
+        .option-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .option.selected .option-radio::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+        }
+
+        .option.correct .option-radio {
+            border-color: var(--success-color);
+        }
+
+        .option.correct .option-radio::after {
+            background-color: var(--success-color);
+        }
+
+        .option.incorrect .option-radio {
+            border-color: var(--error-color);
+        }
+
+        .option.incorrect .option-radio::after {
+            background-color: var(--error-color);
+        }
+
+        .submit-quiz-btn {
+            display: block;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .submit-quiz-btn:hover {
+            background-color: #2563eb;
+        }
+
+        .submit-quiz-btn:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        /* Results Section */
+        .results-container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .score-text {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .result-message {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .result-details {
+            color: var(--gray-color);
+            margin-bottom: 2rem;
+        }
+
+        .retry-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+        }
+
+        .retry-btn:hover {
+            background-color: #2563eb;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .learning-module {
+                padding: 1.5rem;
+            }
+
+            .quiz-container {
+                padding: 1.5rem;
+            }
+
+            .module-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">数据分析技术</div>
+            <a href="index.html" class="back-link">← 返回首页</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>📊 数据分析技术</h1>
+            <p>系统学习数据分析的核心概念、方法和技术，掌握从数据处理到可视化的完整流程</p>
+        </div>
+    </section>
+
+    <!-- Progress Bar -->
+    <section class="progress-section">
+        <div class="progress-container">
+            <div class="progress-header">
+                <span class="progress-title">学习进度</span>
+                <span class="progress-percentage" id="progressPercentage">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Section -->
+    <section class="learning-section">
+        <div class="container">
+            <h2 class="section-title">📚 课程学习</h2>
+            
+            <!-- Module 1 -->
+            <div class="learning-module">
+                <div class="module-header" onclick="toggleModule(1)">
+                    <div class="module-title">
+                        <span class="module-number">1</span>
+                        数据分析概述
+                    </div>
+                    <span class="module-status pending" id="status-1">未开始</span>
+                </div>
+                <div class="module-content" id="content-1">
+                    <div class="learning-content">
+                        <h4>什么是数据分析？</h4>
+                        <p>数据分析是指用适当的统计分析方法对收集来的大量数据进行分析，将它们加以汇总和理解并消化，以求最大化地开发数据的功能，发挥数据的作用。数据分析是为了提取有用信息和形成结论，而对数据加以详细研究和概括总结的过程。</p>
+                        
+                        <h4>数据分析的重要性</h4>
+                        <ul>
+                            <li>帮助企业做出科学的决策</li>
+                            <li>发现业务问题和机会</li>
+                            <li>优化运营效率和成本</li>
+                            <li>预测未来趋势和发展</li>
+                            <li>提升客户满意度</li>
+                        </ul>
+
+                        <h4>数据分析的流程</h4>
+                        <ol>
+                            <li><strong>需求分析</strong>：明确分析目的和要解决的问题</li>
+                            <li><strong>数据收集</strong>：获取相关的数据来源</li>
+                            <li><strong>数据清洗</strong>：处理缺失值、异常值等问题</li>
+                            <li><strong>数据分析</strong>：运用统计方法进行分析</li>
+                            <li><strong>数据可视化</strong>：将结果以图表形式展示</li>
+                            <li><strong>报告撰写</strong>：总结分析结论和建议</li>
+                        </ol>
+
+                        <div class="highlight-box">
+                            <h4>💡 关键点</h4>
+                            <p>数据分析的核心不是复杂的数学公式，而是如何将数据转化为可行动的洞察。好的数据分析应该回答具体的业务问题，而不仅仅是展示数字。</p>
+                        </div>
+                    </div>
+                    <button class="complete-btn" onclick="completeModule(1)">完成本节学习</button>
+                </div>
+            </div>
+
+            <!-- Module 2 -->
+            <div class="learning-module">
+                <div class="module-header" onclick="toggleModule(2)">
+                    <div class="module-title">
+                        <span class="module-number">2</span>
+                        数据类型与数据来源
+                    </div>
+                    <span class="module-status pending" id="status-2">未开始</span>
+                </div>
+                <div class="module-content" id="content-2">
+                    <div class="learning-content">
+                        <h4>数据的基本类型</h4>
+                        <p>在数据分析中，我们通常将数据分为以下几种类型：</p>
+                        
+                        <ul>
+                            <li><strong>结构化数据</strong>：以表格形式存储的数据，如Excel表格、数据库表等</li>
+                            <li><strong>半结构化数据</strong>：具有固定格式但不完全表格化的数据，如JSON、XML等</li>
+                            <li><strong>非结构化数据</strong>：没有固定格式的数据，如文本、图片、音频、视频等</li>
+                        </ul>
+
+                        <h4>常见数据来源</h4>
+                        <ol>
+                            <li><strong>业务系统数据库</strong>：ERP、CRM、OA等系统产生的数据</li>
+                            <li><strong>用户行为数据</strong>：网站访问、App使用等用户交互数据</li>
+                            <li><strong>传感器数据</strong>：物联网设备采集的环境数据</li>
+                            <li><strong>公开数据源</strong>：政府开放平台、统计年鉴等</li>
+                            <li><strong>第三方数据</strong>：数据供应商提供的外部数据</li>
+                        </ol>
+
+                        <div class="highlight-box">
+                            <h4>💡 数据质量的重要性</h4>
+                            <p>数据分析的质量很大程度上取决于数据的质量。在开始分析之前，务必了解数据的来源、采集方式和可能存在的问题。</p>
+                        </div>
+                    </div>
+                    <button class="complete-btn" onclick="completeModule(2)">完成本节学习</button>
+                </div>
+            </div>
+
+            <!-- Module 3 -->
+            <div class="learning-module">
+                <div class="module-header" onclick="toggleModule(3)">
+                    <div class="module-title">
+                        <span class="module-number">3</span>
+                        数据清洗与预处理
+                    </div>
+                    <span class="module-status pending" id="status-3">未开始</span>
+                </div>
+                <div class="module-content" id="content-3">
+                    <div class="learning-content">
+                        <h4>为什么需要数据清洗？</h4>
+                        <p>原始数据通常存在各种问题，如缺失值、重复记录、格式错误等。数据清洗是保证分析结果准确性的关键步骤。</p>
+
+                        <h4>常见的数据问题及处理方法</h4>
+                        
+                        <h4>1. 缺失值处理</h4>
+                        <div class="code-block">
+# 删除缺失值
+df.dropna()
+
+# 用均值填充
+df['列名'].fillna(df['列名'].mean())
+
+# 用中位数填充
+df['列名'].fillna(df['列名'].median())
+
+# 用前后值填充
+df['列名'].fillna(method='ffill')  # 前值填充
+df['列名'].fillna(method='bfill')  # 后值填充
+                        </div>
+
+                        <h4>2. 重复值处理</h4>
+                        <div class="code-block">
+# 检测重复
+df.duplicated()
+
+# 删除重复
+df.drop_duplicates()
+                        </div>
+
+                        <h4>3. 异常值处理</h4>
+                        <div class="code-block">
+# 使用IQR方法检测异常值
+Q1 = df['列名'].quantile(0.25)
+Q3 = df['列名'].quantile(0.75)
+IQR = Q3 - Q1
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+                        </div>
+
+                        <div class="highlight-box">
+                            <h4>💡 数据清洗最佳实践</h4>
+                            <p>在清洗数据之前，先备份原始数据。记录每一步的数据处理操作，便于后续追溯和验证。</p>
+                        </div>
+                    </div>
+                    <button class="complete-btn" onclick="completeModule(3)">完成本节学习</button>
+                </div>
+            </div>
+
+            <!-- Module 4 -->
+            <div class="learning-module">
+                <div class="module-header" onclick="toggleModule(4)">
+                    <div class="module-title">
+                        <span class="module-number">4</span>
+                        描述性统计分析
+                    </div>
+                    <span class="module-status pending" id="status-4">未开始</span>
+                </div>
+                <div class="module-content" id="content-4">
+                    <div class="learning-content">
+                        <h4>描述性统计概述</h4>
+                        <p>描述性统计是对数据进行初步探索的基本方法，通过计算各种统计指标来描述数据的基本特征。</p>
+
+                        <h4>常用统计指标</h4>
+                        
+                        <h4>1. 集中趋势指标</h4>
+                        <ul>
+                            <li><strong>均值（Mean）</strong>：数据的算术平均值，易受极端值影响</li>
+                            <li><strong>中位数（Median）</strong>：数据排序后的中间值，不受极端值影响</li>
+                            <li><strong>众数（Mode）</strong>：出现次数最多的值，适用于分类数据</li>
+                        </ul>
+
+                        <h4>2. 离散程度指标</h4>
+                        <ul>
+                            <li><strong>方差（Variance）</strong>：各数据与均值差的平方的平均值</li>
+                            <li><strong>标准差（Standard Deviation）</strong>：方差的平方根，与原数据单位相同</li>
+                            <li><strong>四分位数（Quartiles）</strong>：将数据分为四等份的三个点</li>
+                            <li><strong>极值（Range）</strong>：最大值与最小值的差</li>
+                        </ul>
+
+                        <div class="code-block">
+import pandas as pd
+import numpy as np
+
+# 计算描述性统计
+df['列名'].describe()
+
+# 分别计算各项指标
+print('均值:', df['列名'].mean())
+print('中位数:', df['列名'].median())
+print('标准差:', df['列名'].std())
+print('方差:', df['列名'].var())
+                        </div>
+
+                        <div class="highlight-box">
+                            <h4>💡 选择正确的统计指标</h4>
+                            <p>根据数据的分布特征选择合适的指标。正态分布数据适合用均值和标准差，偏态分布数据建议使用中位数和四分位数。</p>
+                        </div>
+                    </div>
+                    <button class="complete-btn" onclick="completeModule(4)">完成本节学习</button>
+                </div>
+            </div>
+
+            <!-- Module 5 -->
+            <div class="learning-module">
+                <div class="module-header" onclick="toggleModule(5)">
+                    <div class="module-title">
+                        <span class="module-number">5</span>
+                        数据可视化
+                    </div>
+                    <span class="module-status pending" id="status-5">未开始</span>
+                </div>
+                <div class="module-content" id="content-5">
+                    <div class="learning-content">
+                        <h4>为什么数据可视化很重要？</h4>
+                        <p>数据可视化是将复杂数据转化为直观图形的过程，帮助人们快速理解和发现数据中的规律。一图胜千言，好的可视化能让数据讲故事。</p>
+
+                        <h4>常用图表类型及适用场景</h4>
+                        
+                        <ul>
+                            <li><strong>折线图</strong>：展示数据随时间变化的趋势</li>
+                            <li><strong>柱状图</strong>：比较不同类别的大小</li>
+                            <li><strong>饼图</strong>：展示各部分占总体的比例</li>
+                            <li><strong>散点图</strong>：展示两个变量之间的关系</li>
+                            <li><strong>热力图</strong>：展示数据的密度或强度分布</li>
+                            <li><strong>箱线图</strong>：展示数据的分布和异常值</li>
+                        </ul>
+
+                        <h4>Python数据可视化示例</h4>
+                        <div class="code-block">
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 设置中文字体
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
+
+# 折线图
+plt.figure(figsize=(10, 6))
+plt.plot(x, y, marker='o')
+plt.title('趋势图')
+plt.xlabel('时间')
+plt.ylabel('数值')
+plt.grid(True)
+plt.show()
+
+# 柱状图
+plt.figure(figsize=(10, 6))
+plt.bar(categories, values)
+plt.title('对比图')
+plt.xlabel('类别')
+plt.ylabel('数值')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+                        </div>
+
+                        <div class="highlight-box">
+                            <h4>💡 可视化设计原则</h4>
+                            <p>保持简洁、突出重点、选择合适的图表类型、使用清晰的标签和标题。避免过度装饰和误导性的可视化。</p>
+                        </div>
+                    </div>
+                    <button class="complete-btn" onclick="completeModule(5)">完成本节学习</button>
+                </div>
+            </div>
+
+            <!-- Module 6 -->
+            <div class="learning-module">
+                <div class="module-header" onclick="toggleModule(6)">
+                    <div class="module-title">
+                        <span class="module-number">6</span>
+                        相关分析与回归分析
+                    </div>
+                    <span class="module-status pending" id="status-6">未开始</span>
+                </div>
+                <div class="module-content" id="content-6">
+                    <div class="learning-content">
+                        <h4>相关分析</h4>
+                        <p>相关分析用于研究两个或多个变量之间的关联程度。相关系数的取值范围是-1到1，绝对值越接近1表示相关性越强。</p>
+
+                        <ul>
+                            <li><strong>r > 0</strong>：正相关（一个增加，另一个也增加）</li>
+                            <li><strong>r < 0</strong>：负相关（一个增加，另一个减少）</li>
+                            <li><strong>r = 0</strong>：无相关</li>
+                            <li><strong>|r| > 0.7</strong>：强相关</li>
+                            <li><strong>0.4 < |r| < 0.7</strong>：中等相关</li>
+                            <li><strong>|r| < 0.4</strong>：弱相关</li>
+                        </ul>
+
+                        <h4>回归分析</h4>
+                        <p>回归分析用于建立变量之间的数学模型，预测一个变量随其他变量的变化关系。最常用的是线性回归。</p>
+
+                        <div class="code-block">
+from scipy import stats
+import numpy as np
+
+# 计算相关系数
+correlation = df['变量1'].corr(df['变量2'])
+
+# 线性回归
+slope, intercept, r_value, p_value, std_err = stats.linregress(
+    df['自变量'], df['因变量']
+)
+
+print(f'斜率: {slope}')
+print(f'截距: {intercept}')
+print(f'R²: {r_value**2}')
+print(f'P值: {p_value}')
+                        </div>
+
+                        <div class="highlight-box">
+                            <h4>💡 相关不等于因果</h4>
+                            <p>相关分析只能说明变量之间存在关联，但不能证明因果关系。要确定因果关系，需要控制其他变量或进行实验设计。</p>
+                        </div>
+                    </div>
+                    <button class="complete-btn" onclick="completeModule(6)">完成本节学习</button>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <button class="complete-btn" style="font-size: 1.2rem; padding: 1rem 3rem;" onclick="startQuiz()">
+                    开始测试
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section class="quiz-section" id="quizSection">
+        <div class="container">
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h2>📝 课程测试</h2>
+                    <p>完成所有学习内容后，进行测试检验学习效果</p>
+                </div>
+                
+                <div id="quizContent"></div>
+                
+                <button class="submit-quiz-btn" id="submitQuizBtn" onclick="submitQuiz()">
+                    提交答案
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // 学习进度追踪
+        let completedModules = new Set();
+        let totalModules = 6;
+
+        // 切换模块展开/收起
+        function toggleModule(moduleNumber) {
+            const content = document.getElementById(`content-${moduleNumber}`);
+            content.classList.toggle('active');
+        }
+
+        // 完成模块学习
+        function completeModule(moduleNumber) {
+            if (!completedModules.has(moduleNumber)) {
+                completedModules.add(moduleNumber);
+                
+                // 更新状态标签
+                const status = document.getElementById(`status-${moduleNumber}`);
+                status.textContent = '已完成';
+                status.className = 'module-status completed';
+                
+                // 更新进度条
+                updateProgress();
+                
+                // 保存到本地存储
+                saveProgress();
+            }
+        }
+
+        // 更新进度条
+        function updateProgress() {
+            const percentage = Math.round((completedModules.size / totalModules) * 100);
+            document.getElementById('progressPercentage').textContent = percentage + '%';
+            document.getElementById('progressFill').style.width = percentage + '%';
+        }
+
+        // 保存进度到本地存储
+        function saveProgress() {
+            localStorage.setItem('dataAnalysisProgress', JSON.stringify([...completedModules]));
+        }
+
+        // 从本地存储加载进度
+        function loadProgress() {
+            const saved = localStorage.getItem('dataAnalysisProgress');
+            if (saved) {
+                completedModules = new Set(JSON.parse(saved));
+                completedModules.forEach(num => {
+                    const status = document.getElementById(`status-${num}`);
+                    status.textContent = '已完成';
+                    status.className = 'module-status completed';
+                });
+                updateProgress();
+            }
+        }
+
+        // 测试题目
+        const questions = [
+            {
+                question: "数据分析的核心目标是什么？",
+                options: [
+                    "使用复杂的数学公式",
+                    "将数据转化为可行动的洞察",
+                    "制作漂亮的图表",
+                    "收集尽可能多的数据"
+                ],
+                correct: 1
+            },
+            {
+                question: "数据分析流程的第一步是什么？",
+                options: [
+                    "数据清洗",
+                    "需求分析",
+                    "数据可视化",
+                    "数据收集"
+                ],
+                correct: 1
+            },
+            {
+                question: "以下哪种数据类型是结构化数据？",
+                options: [
+                    "JSON文件",
+                    "图片文件",
+                    "Excel表格",
+                    "视频文件"
+                ],
+                correct: 2
+            },
+            {
+                question: "处理缺失值时，用均值填充适用于什么情况？",
+                options: [
+                    "数据存在极端值时",
+                    "数据分布比较均匀时",
+                    "数据为分类变量时",
+                    "缺失比例超过50%时"
+                ],
+                correct: 1
+            },
+            {
+                question: "中位数相比均值有什么优势？",
+                options: [
+                    "计算更简单",
+                    "不受极端值影响",
+                    "能处理文本数据",
+                    "适合大量数据"
+                ],
+                correct: 1
+            },
+            {
+                question: "标准差用于衡量什么？",
+                options: [
+                    "数据的中心位置",
+                    "数据的离散程度",
+                    "数据的增长速度",
+                    "数据的相关性"
+                ],
+                correct: 1
+            },
+            {
+                question: "展示数据随时间变化的趋势，应该使用什么图表？",
+                options: [
+                    "饼图",
+                    "柱状图",
+                    "折线图",
+                    "散点图"
+                ],
+                correct: 2
+            },
+            {
+                question: "相关系数r的取值范围是多少？",
+                options: [
+                    "0到1",
+                    "-1到0",
+                    "-1到1",
+                    "负无穷到正无穷"
+                ],
+                correct: 2
+            },
+            {
+                question: "相关分析能证明两个变量之间存在因果关系吗？",
+                options: [
+                    "能",
+                    "不能",
+                    "取决于相关系数的大小",
+                    "取决于样本量大小"
+                ],
+                correct: 1
+            },
+            {
+                question: "箱线图主要用于展示什么？",
+                options: [
+                    "数据的变化趋势",
+                    "不同类别的对比",
+                    "数据的分布和异常值",
+                    "各部分的比例关系"
+                ],
+                correct: 2
+            }
+        ];
+
+        let selectedAnswers = {};
+
+        // 开始测试
+        function startQuiz() {
+            if (completedModules.size < totalModules) {
+                alert(`请先完成所有课程学习！当前进度：${completedModules.size}/${totalModules}`);
+                return;
+            }
+            
+            document.getElementById('quizSection').classList.add('active');
+            document.getElementById('quizSection').scrollIntoView({ behavior: 'smooth' });
+            renderQuestions();
+        }
+
+        // 渲染问题
+        function renderQuestions() {
+            const quizContent = document.getElementById('quizContent');
+            quizContent.innerHTML = '';
+            
+            questions.forEach((q, index) => {
+                const questionHTML = `
+                    <div class="question-container fade-in" style="animation-delay: ${index * 0.1}s">
+                        <span class="question-number">第 ${index + 1} 题</span>
+                        <p class="question-text">${q.question}</p>
+                        <div class="options">
+                            ${q.options.map((opt, optIndex) => `
+                                <div class="option" onclick="selectOption(${index}, ${optIndex})">
+                                    <div class="option-radio"></div>
+                                    <span>${opt}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                quizContent.innerHTML += questionHTML;
+            });
+        }
+
+        // 选择选项
+        function selectOption(questionIndex, optionIndex) {
+            selectedAnswers[questionIndex] = optionIndex;
+            
+            // 更新UI
+            const questionContainer = document.querySelectorAll('.question-container')[questionIndex];
+            const options = questionContainer.querySelectorAll('.option');
+            
+            options.forEach((opt, idx) => {
+                opt.classList.remove('selected');
+                if (idx === optionIndex) {
+                    opt.classList.add('selected');
+                }
+            });
+        }
+
+        // 提交测试
+        function submitQuiz() {
+            if (Object.keys(selectedAnswers).length < questions.length) {
+                alert('请完成所有题目后再提交！');
+                return;
+            }
+
+            let correctCount = 0;
+            
+            questions.forEach((q, index) => {
+                const questionContainer = document.querySelectorAll('.question-container')[index];
+                const options = questionContainer.querySelectorAll('.option');
+                
+                options.forEach((opt, optIndex) => {
+                    opt.style.pointerEvents = 'none';
+                    
+                    if (optIndex === q.correct) {
+                        opt.classList.add('correct');
+                    } else if (selectedAnswers[index] === optIndex) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+            });
+
+            // 计算分数
+            questions.forEach((q, index) => {
+                if (selectedAnswers[index] === q.correct) {
+                    correctCount++;
+                }
+            });
+
+            const score = Math.round((correctCount / questions.length) * 100);
+            
+            // 显示结果
+            setTimeout(() => {
+                showResults(score, correctCount);
+            }, 500);
+        }
+
+        // 显示结果
+        function showResults(score, correctCount) {
+            const quizContent = document.getElementById('quizContent');
+            const submitBtn = document.getElementById('submitQuizBtn');
+            
+            let message = '';
+            if (score >= 90) {
+                message = '🎉 优秀！您已经掌握了数据分析技术的核心知识！';
+            } else if (score >= 70) {
+                message = '👍 良好！建议复习一下答错的题目。';
+            } else if (score >= 60) {
+                message = '💪 合格！建议重新学习课程内容。';
+            } else {
+                message = '📚 需要继续努力！建议重新学习课程后再测试。';
+            }
+
+            quizContent.innerHTML = `
+                <div class="results-container fade-in">
+                    <div class="score-circle">
+                        <div>
+                            <div class="score-text">${score}</div>
+                            <div class="score-label">分</div>
+                        </div>
+                    </div>
+                    <h2 class="result-message">${message}</h2>
+                    <p class="result-details">正确 ${correctCount} 题，共 ${questions.length} 题</p>
+                    <button class="retry-btn" onclick="retryQuiz()">重新测试</button>
+                    <a href="index.html" class="retry-btn" style="background-color: var(--secondary-color);">返回首页</a>
+                </div>
+            `;
+            
+            submitBtn.style.display = 'none';
+            
+            // 保存测试结果
+            localStorage.setItem('dataAnalysisQuizScore', score);
+        }
+
+        // 重新测试
+        function retryQuiz() {
+            selectedAnswers = {};
+            document.getElementById('quizSection').classList.remove('active');
+            document.querySelector('.learning-section').scrollIntoView({ behavior: 'smooth' });
+            
+            setTimeout(() => {
+                document.getElementById('quizSection').classList.add('active');
+                document.getElementById('quizContent').innerHTML = '';
+                document.getElementById('submitQuizBtn').style.display = 'block';
+                renderQuestions();
+            }, 500);
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProgress();
+        });
+    </script>
+</body>
+</html>
